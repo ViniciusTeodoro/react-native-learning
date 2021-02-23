@@ -38,7 +38,7 @@ const ProductDetail = (props) => {
 };
 ProductDetail.navigationOptions = (navData) => {
   return {
-    headerTItle: navData.navigation.getParam("productTitle"),
+    headerTitle: navData.navigation.getParam("productTitle"),
   };
 };
 
