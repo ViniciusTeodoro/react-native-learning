@@ -10,9 +10,11 @@ const CartItem = (props) => {
       </View>
       <View style={styles.itemData}>
         <Text style={styles.mainText}>R${props.amount.toFixed(2)} </Text>
-        <TouchableOpacity style={styles.deleteButton}>
-          <Button title="Remove" onPress={props.onRemove} color="red" />
-        </TouchableOpacity>
+        {props.deletable && (
+          <TouchableOpacity style={styles.deleteButton}>
+            <Button title="Remove" onPress={props.onRemove} color="red" />
+          </TouchableOpacity>
+        )}
       </View>
     </View>
   );

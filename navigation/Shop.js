@@ -6,6 +6,7 @@ import ProductsOverview from "../screens/shop/ProductsOverview";
 import ProductDetail from "../screens/shop/ProductDetail";
 import Colors from "../constants/Colors";
 import Orders from "../screens/shop/Orders";
+import UserProducts from "../screens/user/UserProducts";
 import Cart from "../screens/shop/Cart";
 
 const defaultNavigationOptions = {
@@ -31,10 +32,16 @@ const OrdersNavigator = createStackNavigator(
   { defaultNavigationOptions: defaultNavigationOptions }
 );
 
+const AdminNavigator = createStackNavigator(
+  { UserProducts: UserProducts },
+  { defaultNavigationOptions: defaultNavigationOptions }
+);
+
 const ShopNavigator = createDrawerNavigator(
   {
     Products: ProductsNavigator,
     Orders: OrdersNavigator,
+    Admin: AdminNavigator,
   },
   {
     contentOptions: {

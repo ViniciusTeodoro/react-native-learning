@@ -15,6 +15,7 @@ const Orders = (props) => {
         <OrderItem
           amount={itemData.item.totalAmount}
           date={itemData.item.readableDate}
+          items={itemData.item.items}
         />
       )}
     ></FlatList>
@@ -24,7 +25,7 @@ const Orders = (props) => {
 Orders.navigationOptions = (navData) => {
   return {
     headerTItle: "Your Orders",
-    headerLeft: (
+    headerLeft: () => {
       <HeaderButtons HeaderButtonComponent={HeaderButton}>
         <Item
           title="Menu"
@@ -32,8 +33,8 @@ Orders.navigationOptions = (navData) => {
             navData.navigation.toggleDrawer();
           }}
         />
-      </HeaderButtons>
-    ),
+      </HeaderButtons>;
+    },
   };
 };
 
