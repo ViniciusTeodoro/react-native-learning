@@ -1,13 +1,14 @@
-import { createAppContainer } from "react-navigation";
-import { createStackNavigator } from "react-navigation-stack";
-import { createDrawerNavigator } from "react-navigation-drawer";
 import { Platform } from "react-native";
-import ProductsOverview from "../screens/shop/ProductsOverview";
-import ProductDetail from "../screens/shop/ProductDetail";
+import { createAppContainer } from "react-navigation";
+import { createDrawerNavigator } from "react-navigation-drawer";
+import { createStackNavigator } from "react-navigation-stack";
 import Colors from "../constants/Colors";
-import Orders from "../screens/shop/Orders";
-import UserProducts from "../screens/user/UserProducts";
 import Cart from "../screens/shop/Cart";
+import Orders from "../screens/shop/Orders";
+import ProductDetail from "../screens/shop/ProductDetail";
+import ProductsOverview from "../screens/shop/ProductsOverview";
+import EditProduct from "../screens/user/EditProduct";
+import UserProducts from "../screens/user/UserProducts";
 
 const defaultNavigationOptions = {
   headerStyle: {
@@ -33,7 +34,7 @@ const OrdersNavigator = createStackNavigator(
 );
 
 const AdminNavigator = createStackNavigator(
-  { UserProducts: UserProducts },
+  { UserProducts: UserProducts, EditProduct: EditProduct },
   { defaultNavigationOptions: defaultNavigationOptions }
 );
 
