@@ -4,6 +4,7 @@ import {
   HeaderButton,
   HeaderButtons,
   Item,
+  Alert,
 } from "react-navigation-header-buttons";
 import { useSelector, useDispatch } from "react-redux";
 import * as productsActions from "../../store/actions/products";
@@ -16,6 +17,7 @@ const EditProduct = (props) => {
     state.products.userProducts.find((prod) => prod.id === prodId)
   );
   const [title, setTitle] = useState(editedProduct ? editedProduct.title : "");
+  const [titleIsValid, setTitleIsValid] = useState(false);
   const [imageUrl, setImageUrl] = useState(
     editedProduct ? editedProduct.imageUrl : ""
   );
@@ -25,18 +27,33 @@ const EditProduct = (props) => {
   );
 
   const submitHandler = useCallback(() => {
-    if (editedProduct) {
-      dispatch(
-        productsActions.updateProduct(prodId, title, description, imageUrl)
-      );
+    if (!titleIsValid) {
+      Alert.alert("Wrong input!", "Please check the errors in the form.", [
+        { text: "Okay" },
+      ]);
+      return;
     } else {
-      dispatch(
-        productsActions.createProduct(title, description, imageUrl, +price)
-      );
+      if (editedProduct) {
+        dispatch(
+          productsActions.updateProduct(prodId, title, description, imageUrl)
+        );
+      } else {
+        dispatch(
+          productsActions.createProduct(title, description, imageUrl, +price)
+        );
+      }
+      props.navigation.goBack();
     }
-    props.navigation.goBack();
   }, [dispatch, prodId, title, description, imageUrl, price]); //eslint-disable-line
 
+  const titleChangeHandle = (text) => {
+    if (text.trim().length === 0) {
+      setTitleIsValid(false);
+    } else {
+      setTitleIsValid(true);
+    }
+    setTitle(text);
+  };
   useEffect(() => {
     props.navigation.setParams({ submit: submitHandler });
   }, [submitHandler]);
@@ -49,11 +66,12 @@ const EditProduct = (props) => {
           <TextInput
             style={styles.input}
             value={title}
-            onChangeText={(text) => setTitle(text)}
+            onChangeText={titleChangeHandle}
             autoCapitalize="sentences"
             autoCorrect
             returnKeyType="next"
           />
+          {!titleIsValid && <Text>Please enter a valid Title</Text>}
         </View>
         <View style={styles.formControl}>
           <Text style={styles.label}>Image Url</Text>
