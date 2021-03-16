@@ -53,7 +53,6 @@ const EditProduct = (props) => {
             autoCapitalize="sentences"
             autoCorrect
             returnKeyType="next"
-            onEndEditing={()}
           />
         </View>
         <View style={styles.formControl}>
